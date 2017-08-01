@@ -1,44 +1,59 @@
 package Sort;
 
+/**
+ å †æ’åº
+ æ—¶é—´å¤æ‚åº¦ å¹³å‡ o(nlogn) æœ€å¥½ o(nlogn) æœ€å o(nlogn)
+ ç©ºé—´å¤æ‚åº¦ o(1)
+ **/
 public class HeapSort {
 	
-	public static void HeapAdjust(Integer data[], int s, int m) {
-		// ³ısÍâ¾ùÂú×ã¶Ñ£¬µ÷Õûs³É´ó¶¥¶Ñ
-		int rc = data[s], j; // rcÔİ´æs
-		for (j = 2 * s; j < m; j *= 2) { // ´ÓsµÄº¢×ÓÖĞÕÒµ½s¸Ã²åÈëµÄÎ»ÖÃ
-			if (j < m && data[j] < data[j + 1]) // Ñ¡Ôñº¢×ÓÖĞ½Ï´óµÄÄÇ¸ö
-				j++;
-			if (data[j] < rc) // Èç¹ûº¢×ÓĞ¡ÓÚÁËs,ÄÇÃ´ËµÃ÷ÔÚ´ó¶¥¶ÑÖĞsÓ¦²åÈëµÄÎ»ÖÃ
-				break;
-			else { // Èç¹ûº¢×Ó´óÓÚs,ÄÇÃ´½«º¢×ÓÉÏÒÆµ½Ë«Ç×½áµã£¨s¼ÇÂ¼ÁËÕâ´ÎµÄj,Ò²¾ÍÊÇÏÂÒ»¸öº¢×ÓµÄË«Ç×£©
-				data[s] = data[j];
-				s = j;
-			}
-		}
-		data[s] = rc; // rc>=data[j],rcÅÅj¶¥ÉÏ£¬Òò´ËjµÄË«Ç×Ó¦¸ÃÎªrc
-	}
+    /**
+     * å¤§é¡¶å †è°ƒæ•´
+     */
+    public static void HeadAdjust(Integer data[],int adjustIndex,int lastIndex){
+        // é™¤så¤–å‡æ»¡è¶³å †ï¼Œè°ƒæ•´sæˆå¤§é¡¶å †
+        data[0] = data[adjustIndex];
+        // ä»sçš„å­©å­ä¸­æ‰¾åˆ°sè¯¥æ’å…¥çš„ä½ç½®
+        for(int i=2*adjustIndex; i<lastIndex ; i*=2){
+            // é€‰æ‹©å­©å­ä¸­è¾ƒå¤§çš„é‚£ä¸ª
+            if(i<lastIndex && data[i] < data[i+1]){
+                i++;
+            }
+            // å¦‚æœå­©å­å°äºäº†adjustIndex,é‚£ä¹ˆè¯´æ˜åœ¨å¤§é¡¶å †ä¸­adjustIndexåº”æ’å…¥çš„ä½ç½®
+            if(data[i] < data[0]){
+                break;
+            }
+            // å¦‚æœå­©å­å¤§äºadjustIndex,é‚£ä¹ˆå°†å­©å­ä¸Šç§»åˆ°åŒäº²ç»“ç‚¹ï¼ˆadjustIndexè®°å½•äº†è¿™æ¬¡çš„i,ä¹Ÿå°±æ˜¯ä¸‹ä¸€ä¸ªå­©å­çš„åŒäº²ï¼‰
+            else{
+                data[adjustIndex] = data[i];
+                adjustIndex = i;
+            }
+        }
+        // adjustValue >= data[i],adjustIndex æ’ié¡¶ä¸Šï¼Œå› æ­¤içš„çˆ¶èŠ‚ç‚¹adjustIndexåº”è¯¥æ’å…¥ç›®æ ‡èŠ‚ç‚¹
+        data[adjustIndex] = data[0];
+    }
 
-	public static void HeapSort(Integer data[]) {
-		int size = data.length - 1, temp;
-		// ´´½¨³õÊ¼´ó¶¥¶Ñ,¶Ô·ÇÖÕ¶Ë¶¥µãÅÅĞò
-		for (int i = size / 2; i >= 0; i--) {
-			HeapAdjust(data, i, size);
-		}
-		// ¶Ôn-1¸ö¼ÇÂ¼µÄ¶Ñ²»¶ÏÉ¸Ñ¡(×îºóÒ»¸ö²»ÓÃÉ¸Ñ¡)
-		for (int i = size; i >= 1; --i) {
-			// ½«¶¥¶ÑÓë×îºóÒ»¸öÔªËØ»¥»»
-			temp = data[i];
-			data[i] = data[0];
-			data[0] = temp;
-			// ½«²ÎÓë¶ÑÅÅĞòµÄ×ÜÊı¼õÉÙ1,¿ÉÈÃ¸Õ±»»»µÄ¶Ñ¶¥²»²ÎÓëÅÅĞò
-			HeapAdjust(data, 0, i - 1);
-		}
-	}
+    public static void HeapSort(Integer data[]) {
+        int temp;
+        // åˆ›å»ºåˆå§‹å¤§é¡¶å †,å¯¹éç»ˆç«¯é¡¶ç‚¹æ’åº
+        for(int i = (data.length-1)/2 ; i>=1 ; i--){
+            HeadAdjust(data,i,data.length-1);
+        }
+        // å¯¹n-1ä¸ªè®°å½•çš„å †ä¸æ–­ç­›é€‰(æœ€åä¸€ä¸ªä¸ç”¨ç­›é€‰),ç”¨æœ€åä¸€ä¸ªèŠ‚ç‚¹ä¸æ–­å’Œæ ¹èŠ‚ç‚¹äº¤æ¢å†è°ƒæ•´å‡ºæ–°çš„æ ¹èŠ‚ç‚¹
+        for(int i = data.length-1 ; i>=2 ; i--){
+            // å°†é¡¶å †ä¸æœ€åä¸€ä¸ªå…ƒç´ äº’æ¢
+            temp = data[i];
+            data[i] = data[1];
+            data[1] = temp;
+            // å°†å‚ä¸å †æ’åºçš„æ€»æ•°å‡å°‘1,å¯è®©åˆšè¢«æ¢çš„å †é¡¶ä¸å‚ä¸æ’åº
+            HeadAdjust(data,1,i-1);
+        }
+    }
 
-	public static void main(String[] args) {
-		Integer[] c = { 4, 9, 23, 1, 45, 27, 5, 2 };
-		HeapSort(c);
-		for (int i = 0; i < c.length; i++)
-			System.out.println("¶ÑÅÅĞò£º" + c[i]);
-	}
+    public static void main(String[] args) {
+        Integer[] c = { null,29,4, 9, 23, 1, 45, 27, 5, 2 };
+        HeapSort(c);
+        Stream.of(c).skip(1).forEach(System.out::println);
+    }
+	
 }
