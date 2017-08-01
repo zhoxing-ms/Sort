@@ -4,6 +4,7 @@ package Sort;
  快速排序
  时间复杂度 平均o(nlogn) 最好o(nlogn) 最坏o(n^2)
  空间复杂度 o(nlogn)
+ 不稳定排序
 **/
 public class QuickSort {
 	
