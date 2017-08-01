@@ -4,6 +4,7 @@ package Sort;
  归并排序
  时间复杂度 平均o(nlogn) 最好o(nlogn) 最坏o(nlogn)
  空间复杂度 o(1)
+ 稳定排序
 **/
 public class MergeSort {
 	
