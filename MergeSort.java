@@ -1,46 +1,53 @@
 package Sort;
+
+/**
+ å½’å¹¶æ’åº
+ æ—¶é—´å¤æ‚åº¦ å¹³å‡o(nlogn) æœ€å¥½o(nlogn) æœ€åo(nlogn)
+ ç©ºé—´å¤æ‚åº¦ o(1)
+**/
 public class MergeSort {
 	
-	public static void Merge(int []sr,int []tr,int i,int m,int n){
-		//sr i..m sr m+1..n ¹é²¢ÎªÓĞĞòtr
-		int j,k;
-		for(k=i,j=m+1;i<=m&&j<=n;++k){
-			if(sr[i]<sr[j])
-				tr[k]=sr[i++];
-			else
-				tr[k]=sr[j++];
-		}
-		if(i<=m)                //sr i..mÓĞÊ£Óà£¬°ÑÓàÏÂµÄ¸øtr
-			for(int last=k;last<=n;last++)
-				tr[last]=sr[i++];
-		else					//sr m+1..nÓĞÊ£Óà£¬°ÑÓàÏÂµÄ¸øtr
-			for(int last=k;last<=n;last++)
-				tr[last]=sr[j++];	    
-	}
-	
-	public static void MSort(int []sr,int []tr1,int s,int t){
-		//sr s..t ¹é²¢³Étr1 s..t
-		if(s==t)
-			tr1[s]=sr[s];
-		else{
-			int m=(s+t)/2;
-			int []tr2=new int[sr.length];
-			//½«srÒ»·ÖÎªÁ½¸ö·Ö±ğÓĞĞòµÄĞòÁĞ£¬·Ö±ğ¸´ÖÆ¸øtr2µÄ s..m ºÍ m+1..t
-			MSort(sr,tr2,s,m);
-			MSort(sr,tr2,m+1,t);
-			//ÔÙ½«tr2µÄs..m 1..t¹é²¢³ÉÓĞĞòµÄtr1
-			Merge(tr2,tr1,s,m,t);		
-		}
-	}
-	
-	public static void MergeSort(int []data){
-		MSort(data,data,0,data.length-1);
-	}
+    public static void Merge(Integer []sourceArray,Integer []targetArray,int i,int mid,int n){
+        //sourceArray i..mid  sourceArray mid+1..n  å½’å¹¶ä¸ºæœ‰åºtargetArray
+        int j,k;
+        for(k=i,j=mid+1; i<=mid && j<=n ; ++k){
+            if(sourceArray[i] < sourceArray[j]){
+                targetArray[k] = sourceArray[i++];
+            }else{
+                targetArray[k] = sourceArray[j++];
+            }
+        }
+        if(i <= mid){
+            for(int last=k; last <= n; last++){
+                targetArray[last] = sourceArray[i++];
+            }
+        }else{
+            for(int last=k; last <= n; last++){
+                targetArray[last] = sourceArray[j++];
+            }
+        }
+    }
 
-	public static void main(String[] args) {
-		int[] c = {100, 4, 9, 23, 1, 45, 27, 5, 2 };
-		MergeSort(c);
-		for (int i = 0; i <c.length; i++)
-			System.out.println("¹é²¢ÅÅĞò£º" + c[i]);
-	}
+    public static void MSort(Integer []sourceArray,Integer []targetArray,int s,int t){
+        if(s == t){
+            targetArray[s] = sourceArray[s];
+        }else{
+            int mid = (s+t)/2;
+            Integer []halfTagetAray = new Integer[sourceArray.length];
+            MSort(sourceArray,halfTagetAray,s,mid);
+            MSort(sourceArray,halfTagetAray,mid+1,t);
+            Merge(halfTagetAray,targetArray,s,mid,t);
+        }
+    }
+
+    public static void MergeSort(Integer []data){
+        MSort(data,data,0,data.length-1);
+    }
+
+    public static void main(String[] args) {
+        Integer[] c = {100, 4, 9, 23, 1, 45, 27, 5, 2 };
+        MergeSort(c);
+        Stream.of(c).forEach(System.out::println);
+    }
+
 }
