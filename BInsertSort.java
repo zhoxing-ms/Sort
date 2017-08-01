@@ -26,10 +26,10 @@ public class BInsertSort {
 		}
 	}
 	
-	public static void main(String[] args) {
-		Integer[] c = {null, 4, 9, 23, 1, 45, 27, 5, 2 };
-		BInsertSort(c);
-		for (int i = 1; i <c.length; i++)
-			System.out.println("²åÈëÅÅÐò£º" + c[i]);
-	}
+        public static void main(String[] args) {
+        	Integer[] c = {null, 4, 9, 23, 1, 45, 27, 5, 2 };
+        	BInsertSort(c);
+        	Arrays.stream(c).forEach(System.out::println);
+   	 }
+	
 }
