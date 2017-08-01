@@ -1,37 +1,47 @@
 package Sort;
+
+/**
+ å¿«é€Ÿæ’åº
+ æ—¶é—´å¤æ‚åº¦ å¹³å‡o(nlogn) æœ€å¥½o(nlogn) æœ€åo(n^2)
+ ç©ºé—´å¤æ‚åº¦ o(nlogn)
+**/
 public class QuickSort {
 	
-	public static int Partition(Integer[] data,int low,int high){
-		data[0]=data[low];
-		int pivotkey=data[low];
-		while(low<high){
-			while(low<high&&data[high]>=pivotkey)   //´Ó×îºóÆğÓĞ±ÈÊàÖáĞ¡µÄ£¬¾Í¸³Öµ¸øÇ°ÃæµÄÊàÖáµÄÎ»ÖÃ
-				high--;
-			data[low]=data[high];
-			while(low<high&&data[low]<=pivotkey)    //´Ó×îÇ°ÆğÓĞ±ÈÊàÖá´óµÄ£¬¾Í¸³Öµ¸øÇ°Ò»´Î½»»»¹ıµÄÊàÖáµÄÎ»ÖÃ
-				low++;
-			data[high]=data[low];			
-		}
-		data[low]=data[0];
-		return low;
-	}
+    public static int Partition( Integer[] data,int low,int high){
+       data[0] = data[low];
+       int pivotkey = data[low];
+       while(low < high){
+           //ä»æœ€åèµ·æœ‰æ¯”æ¢è½´å°çš„ï¼Œå°±èµ‹å€¼ç»™å‰é¢çš„æ¢è½´çš„ä½ç½®
+           while(low < high && data[high] >= pivotkey ){
+                high--;
+           }
+           data[low] = data[high];
+           //ä»æœ€å‰èµ·æœ‰æ¯”æ¢è½´å¤§çš„ï¼Œå°±èµ‹å€¼ç»™å‰ä¸€æ¬¡äº¤æ¢è¿‡çš„æ¢è½´çš„ä½ç½®
+           while(low < high && data[low] <= pivotkey ){
+               low++;
+           }
+           data[high] = data[low];
+       }
+       data[low] = data[0];
+       return low;
+    }
 
-	public static void QSort(Integer[] data,int low,int high){
-		if(low<high){
-			int p=Partition(data,low,high);
-			QSort(data,low,p-1);
-			QSort(data,p+1,high);
-		}
-	}
-	
-	public static void QuickSort(Integer[] c){
-		QSort(c,1,c.length-1);
-	}
-	
-	public static void main(String[] args) {
-		Integer[] c = {-1,23, 4, 9, 23, 1, 45, 27, 5, 2 };
-		QuickSort(c);
-		for (int i = 1; i <c.length; i++)
-			System.out.println("¿ìËÙÅÅĞò£º" + c[i]);
-	}
+    public static void QSort(Integer[] data,int low,int high){
+        if(low < high){
+            int p = Partition(data,low,high);
+            QSort(data,low,p-1);
+            QSort(data,p+1,high);
+        }
+    }
+
+    public static void QuickSort(Integer[] c){
+        QSort(c,1,c.length-1);
+    }
+
+    public static void main(String[] args) {
+        Integer[] c = {null,23, 4, 9, 23, 1, 45, 27, 5, 2  };
+        QuickSort(c);
+        Stream.of(c).skip(1).forEach(System.out::println);
+    }
+
 }
