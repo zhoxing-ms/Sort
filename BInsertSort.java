@@ -29,7 +29,7 @@ public class BInsertSort {
         public static void main(String[] args) {
         	Integer[] c = {null, 4, 9, 23, 1, 45, 27, 5, 2 };
         	BInsertSort(c);
-        	Arrays.stream(c).forEach(System.out::println);
-   	 }
+        	Arrays.stream(c).skip(1).forEach(System.out::println);
+   	}
 	
 }
