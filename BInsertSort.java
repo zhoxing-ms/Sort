@@ -1,4 +1,10 @@
 package Sort;
+
+/**
+  折半插入排序
+  时间复杂度 平均 o(n^2) 最好o(n) 最坏o(n^2)
+  空间复杂度 o(1)
+**/
 public class BInsertSort {
 	public static void BInsertSort(Comparable[] data){
 		int i,j;
@@ -24,6 +30,6 @@ public class BInsertSort {
 		Integer[] c = {null, 4, 9, 23, 1, 45, 27, 5, 2 };
 		BInsertSort(c);
 		for (int i = 1; i <c.length; i++)
-			System.out.println("��������" + c[i]);
+			System.out.println("²åÈëÅÅÐò£º" + c[i]);
 	}
 }
