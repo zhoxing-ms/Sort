@@ -4,6 +4,7 @@ package Sort;
  堆排序
  时间复杂度 平均 o(nlogn) 最好 o(nlogn) 最坏 o(nlogn)
  空间复杂度 o(1)
+ 不稳定
  **/
 public class HeapSort {
 	
