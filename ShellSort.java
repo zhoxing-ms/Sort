@@ -4,6 +4,7 @@ package Sort;
  希尔排序
  时间复杂度 平均o(n^1.3) 最好o(n) 最坏o(n^2)
  空间复杂度 o(1)
+ 不稳定排序
  **/
 public class ShellSort {
 	
