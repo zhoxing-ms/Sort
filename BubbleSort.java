@@ -11,9 +11,9 @@ public class BubbleSort {
 		int temp=0;
 		for(int i=0;i<data.length;i++)
 			for(int j=i+1;j<data.length;j++)
-				if(data[i]>data[j]){
-					temp=data[i];
-					data[i]=data[j];
+				if(data[j-1]>data[j]){
+					temp=data[j-1];
+					data[j-1]=data[j];
 					data[j]=temp;
 				}		
 	}
