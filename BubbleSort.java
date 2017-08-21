@@ -9,13 +9,13 @@ package Sort;
 public class BubbleSort {
 	public static void BubbleSort(Integer []data){
 		int temp=0;
-		for(int i=0;i<data.length;i++)
-			for(int j=i+1;j<data.length;j++)
-				if(data[j-1]>data[j]){
-					temp=data[j-1];
-					data[j-1]=data[j];
+		for(int i=data.length-1;i>0;i--)
+			for(int j=0;j<i;j++)
+				if(data[j]>data[j+1]){
+					temp=data[j+1];
+					data[j+1]=data[j];
 					data[j]=temp;
-				}		
+				}	
 	}
 
 	public static void main(String[] args) {
