@@ -8,45 +8,39 @@ package Sort;
 **/
 public class MergeSort {
 	
-    public static void Merge(Integer []sourceArray,Integer []targetArray,int i,int mid,int n){
-        //sourceArray i..mid  sourceArray mid+1..n  归并为有序targetArray
-        int j,k;
-        for(k=i,j=mid+1; i<=mid && j<=n ; ++k){
-            if(sourceArray[i] < sourceArray[j]){
-                targetArray[k] = sourceArray[i++];
-            }else{
-                targetArray[k] = sourceArray[j++];
-            }
-        }
-        if(i <= mid){
-            for(int last=k; last <= n; last++){
-                targetArray[last] = sourceArray[i++];
-            }
-        }else{
-            for(int last=k; last <= n; last++){
-                targetArray[last] = sourceArray[j++];
-            }
-        }
+    public static void MergeSort(Integer[] array) {
+        sort(array, 0, array.length - 1);
     }
 
-    public static void MSort(Integer []sourceArray,Integer []targetArray,int s,int t){
-        if(s == t){
-            targetArray[s] = sourceArray[s];
-        }else{
-            int mid = (s+t)/2;
-            Integer []halfTagetAray = new Integer[sourceArray.length];
-            MSort(sourceArray,halfTagetAray,s,mid);
-            MSort(sourceArray,halfTagetAray,mid+1,t);
-            Merge(halfTagetAray,targetArray,s,mid,t);
+    public static void sort(Integer[] array, int left, int right) {
+        if (left == right) {
+            return;
         }
+        int mid = (left + right) >> 1;
+        sort(array, left, mid);
+        sort(array, mid + 1, right);
+        merge(array, left, mid, right);
     }
 
-    public static void MergeSort(Integer []data){
-        MSort(data,data,0,data.length-1);
+    public static void merge(Integer[] array, int left, int mid, int right) {
+        int[] tmp = new int[right - left + 1];
+        int index = 0, p1 = left, p2 = mid + 1;
+        while (p1 <= mid && p2 <= right) {
+            tmp[index++] = array[p1] < array[p2] ? array[p1++] : array[p2++];
+        }
+        while (p1 <= mid) {
+            tmp[index++] = array[p1++];
+        }
+        while (p2 <= mid) {
+            tmp[index++] = array[p2++];
+        }
+        for (int i = 0; i < tmp.length; i++) {
+            array[left + i] = tmp[i];
+        }
     }
 
     public static void main(String[] args) {
-        Integer[] c = {100, 4, 9, 23, 1, 45, 27, 5, 2 };
+        Integer[] c = {100, 4, 9, 23, 1, 45, 27, 5, 2};
         MergeSort(c);
         Stream.of(c).forEach(System.out::println);
     }
