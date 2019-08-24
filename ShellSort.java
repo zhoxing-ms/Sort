@@ -31,7 +31,7 @@ public class ShellSort {
         Integer[] data = new Integer[] {0, 32, 4, 3, 6, 2, 1, 9, 5, 8, 7, 22, 11};
         Integer[] dlta = new Integer[] {3, 2, 1};
         sellSort(data, dlta);
-        Stream.of(data).skip(1).forEach(System.out::println);
+        Stream.of(data).forEach(System.out::println);
     }
 
 }
