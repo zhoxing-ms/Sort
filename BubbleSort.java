@@ -7,7 +7,8 @@ package Sort;
   稳定排序
 **/
 public class BubbleSort {
-     public static void BubbleSort(Integer[] data) {
+  
+     public static void bubbleSort(Integer[] data) {
         for (int i = data.length - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
                 if (data[j + 1] < data[j]) {
@@ -21,7 +22,7 @@ public class BubbleSort {
 
     public static void main(String[] args) {
         Integer[] c = {4, 9, 23, 1, 45, 27, 5, 2};
-        BubbleSort(c);
+        bubbleSort(c);
         Stream.of(c).forEach(System.out::println);
     }
 
