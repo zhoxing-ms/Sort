@@ -8,7 +8,7 @@ package Sort;
 **/
 public class MergeSort {
 	
-    public static void MergeSort(Integer[] array) {
+    public static void mergeSort(Integer[] array) {
         sort(array, 0, array.length - 1);
     }
 
@@ -41,7 +41,7 @@ public class MergeSort {
 
     public static void main(String[] args) {
         Integer[] c = {100, 4, 9, 23, 1, 45, 27, 5, 2};
-        MergeSort(c);
+        mergeSort(c);
         Stream.of(c).forEach(System.out::println);
     }
 
