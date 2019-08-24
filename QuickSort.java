@@ -10,39 +10,39 @@ public class QuickSort {
 
     public static int partition(Integer[] data, int low, int high) {
         int pivotKey = (low + high) / 2;
-        data[0] = data[pivotKey];
+        int pivot = data[pivotKey];
         data[pivotKey] = data[low];
         while (low < high) {
-            while (low < high && data[high] >= data[0]) {
+            while (low < high && data[high] >= pivot) {
                 high--;
             }
             data[low] = data[high];
-            while (low < high && data[low] <= data[0]) {
+            while (low < high && data[low] <= pivot) {
                 low++;
             }
             data[high] = data[low];
         }
-        data[low] = data[0];
+        data[low] = pivot;
         return low;
     }
 
-    public static void Qsort(Integer[] data, int low, int high) {
+    public static void qSort(Integer[] data, int low, int high) {
         if (low >= high) {
             return;
         }
         int pivot = partition(data, low, high);
-        Qsort(data, low, pivot - 1);
-        Qsort(data, pivot + 1, high);
+        qSort(data, low, pivot - 1);
+        qSort(data, pivot + 1, high);
     }
 
-    public static void QuickSort(Integer[] data) {
-        Qsort(data, 0, data.length - 1);
+    public static void quickSort(Integer[] data) {
+        qSort(data, 0, data.length - 1);
     }
 
     public static void main(String[] args) {
-        Integer[] c = {null, 23, 4, 9, 23, 1, 45, 27, 5, 2};
-        QuickSort(c);
-        Stream.of(c).skip(1).forEach(System.out::println);
+        Integer[] c = {23, 4, 9, 23, 1, 45, 27, 5, 2};
+        quickSort(c);
+        Stream.of(c).forEach(System.out::println);
     }
 
 }
