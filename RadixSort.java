@@ -14,9 +14,8 @@ public class RadixSort {
      */
     public static void radixSort(Integer[] array, int maxBit) {
         int weight = 1; // 当前处理的位 1表示个位 10表示十位 100表示百位
-        int bit = 0; // 已处理的位数
         List<Integer>[] buckets = new ArrayList[10]; // 第一维是各数字在weight位的值digit,第二维是该位是digit的数字列表
-        while (bit < maxBit) {
+        for (int bit = 0; bit < maxBit; bit++) {
             for (int i = 0; i < 10; i++) { // 初始化或清空上一轮处理的结果
                 buckets[i] = new ArrayList<>();
             }
@@ -24,19 +23,30 @@ public class RadixSort {
                 buckets[num / weight % 10].add(num); // 计算出该数字在weight位上的值digit
             }
             int index = 0;
-            for (int i = 0; i < 10; i++) { // 按照weight位的digit依次从低到高排序
+            for (int i = 0; i < 10; i++) {   // 按照weight位的digit依次从低到高排序
                 for (Integer num : buckets[i]) {
                     array[index++] = num;
                 }
             }
             weight = weight * 10;
-            bit++;
         }
+    }
+
+    private static int getMaxBit(Integer[] array) {
+        int maxValue = array[0];
+        for (int value : array) {
+            maxValue = Math.max(value, maxValue);
+        }
+        int maxBit = 0;
+        for (long temp = maxValue; temp > 0; temp /= 10) {
+            maxBit++;
+        }
+        return maxBit;
     }
 
     public static void main(String[] args) {
         Integer[] data = {73, 22, 93, 43, 55, 14, 28, 65, 39, 81, 33, 100, 231, 900};
-        radixSort(data, 3);
+        radixSort(data, getMaxBit(data));
         Stream.of(data).forEach(System.out::println);
     }
 
