@@ -14,7 +14,7 @@ public class BInsertSort {
                 continue;
             }
             Comparable tmp = data[i];
-            int low = 1, high = i - 1;
+            int low = 0, high = i - 1;
             while (low <= high) {
                 int mid = low + (high - low) / 2;
                 if (data[mid].compareTo(tmp) < 0) {
@@ -33,7 +33,7 @@ public class BInsertSort {
     public static void main(String[] args) {
         Integer[] c = {4, 9, 23, 1, 45, 27, 5, 2};
         binsertSort(c);
-        Arrays.stream(c).skip(1).forEach(System.out::println);
+        Arrays.stream(c).forEach(System.out::println);
     }
 
 }
