@@ -9,14 +9,14 @@ package Sort;
 public class ShellSort {
 	
     public static void shellInsert(Comparable[] array, Integer dk) {
-        for (int i = 1 + dk; i < array.length; i++) {
+        for (int i = dk; i < array.length; i++) {
             if (array[i].compareTo(array[i - dk]) < 0) {
-                array[0] = array[i];
+                Comparable tmp = array[i];
                 int j = i - dk;
-                for (; j > 0 && array[0].compareTo(array[j]) < 0; j = j - dk) {
+                for (; j >= 0 && tmp.compareTo(array[j]) < 0; j = j - dk) {
                     array[j + dk] = array[j];
                 }
-                array[j + dk] = array[0];
+                array[j + dk] = tmp;
             }
         }
     }
