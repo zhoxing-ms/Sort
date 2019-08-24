@@ -8,23 +8,23 @@ package Sort;
 **/
 public class InsertSort {
 	
-     public static void InsertSort(Comparable[] data) {
-        for (int i = 2; i < data.length; i++) {
+    public static void insertSort(Comparable[] data) {
+        for (int i = 1; i < data.length; i++) {
             if (data[i].compareTo(data[i - 1]) < 0) {
-                data[0] = data[i];
+                Comparable tmp = data[i];
                 int j = i - 1;
-                for (; j > 0 && data[0].compareTo(data[j]) < 0; j--) {
+                for (; j >= 0 && tmp.compareTo(data[j]) < 0; j--) {
                     data[j + 1] = data[j];
                 }
-                data[j + 1] = data[0];
+                data[j + 1] = tmp;
             }
         }
     }
 
     public static void main(String[] args) {
-        Integer[] c = {null, 4, 9, 23, 1, 45, 27, 5, 2};
-        InsertSort(c);
-        Stream.of(c).skip(1).forEach(System.out::println);
+        Integer[] c = {4, 9, 23, 1, 45, 27, 5, 2};
+        insertSort(c);
+        Stream.of(c).forEach(System.out::println);
     }
 
 }
